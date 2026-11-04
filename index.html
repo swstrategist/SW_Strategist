@@ -895,9 +895,9 @@
 { name: "Tablo",    img: "https://i.imgur.com/2GHKv0l.png" },
 { name: "Monte",    img: "https://i.imgur.com/kb8dyxQ.png" },
 { name: "Fumée",    img: "https://i.imgur.com/XPr2z37.png" },
-{ name: "Refroissement",    img: "https://i.imgur.com/68ziGjn.png" },
-{ name: "Venteux",   img: "https://i.imgur.com/MDGnKnx.png" },
-{ name: "Brumeux",    img: "https://i.imgur.com/5hOB2Mu.png" },
+{ name: "Chilling",    img: "https://i.imgur.com/68ziGjn.png" },
+{ name: "Windy",   img: "https://i.imgur.com/MDGnKnx.png" },
+{ name: "Misty",    img: "https://i.imgur.com/5hOB2Mu.png" },
 { name: "Poussiéreux",   img: "https://i.imgur.com/AFXRM3G.png" },
 { name: "Smokey",    img: "https://guardian-of-siege.odoo.com/web/image/1460-106d293e/fumee.webp" },
 { name: "Chilling",    img: "https://guardian-of-siege.odoo.com/web/image/558-877/chilling.webp" },
@@ -1682,25 +1682,10 @@
                 const inputEl = wrapper.querySelector('input');
                 const dropdownEl = wrapper.querySelector('.autocomplete-dropdown');
 
-                inputEl.oninput = (e) => {
-                    updateMonsterAvatar(wrapper, e.target.value);
-                    onMonsterInput(e.target.value, teamType, slotIdx, dropdownEl);
-                };
+                inputEl.oninput = (e) => onMonsterInput(e.target.value, teamType, slotIdx, dropdownEl);
 
                 container.appendChild(wrapper);
             });
-        }
-
-        const DEFAULT_MONSTER_IMG = 'https://i.imgur.com/zobLe0B.png';
-
-        // Met à jour la petite image à côté du champ dès que le nom change :
-        // si le nom ne correspond à aucun monstre (ou est vidé), on remet l'image par défaut.
-        function updateMonsterAvatar(wrapper, name) {
-            const img = wrapper.querySelector('.monster-card-avatar img');
-            if (!img) return;
-            const mObj = LOCAL_MONSTER_DATABASE.find(m => m.name.toLowerCase() === name.trim().toLowerCase());
-            img.src = mObj ? mObj.img : DEFAULT_MONSTER_IMG;
-            img.alt = name;
         }
 
         function onMonsterInput(val, teamType, slotIdx, dropdown) {
